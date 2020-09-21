@@ -7,7 +7,15 @@
 </div>
 
 <ul class="list-unstyled">
-  <li class="alert alert-info"
-      *ngFor="let item of items"><span>{{ item.description}}</span></li>
+  <li class="alert"
+      [ngClass]="{'alert-info': !item.completed, 'alert-secondary': item.completed}"
+      *ngFor="let item of items$ | async">
+    <button *ngIf="!item.completed"
+            (click)="markComplete(item)"
+            class="btn btn-sm btn-danger">X</button>
+    <span [ngClass]="{'completed': item.completed}">{{ item.description}}</span></li>
 
 </ul>
+<button (click)="removeCompleted()"
+        [disabled]="!(hasCompletedItems$ | async)"
+        class="btn btn-danger">Remove Completed Items</button>

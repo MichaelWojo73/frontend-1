@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Your Todo List</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Summary of your Day Ahead</h6>
+    <p class="card-text">You have {{ (todoSummary$ | async)?.totalTodos }} total todos.</p>
+    <p class="card-text">You have {{ (todoSummary$ | async)?.completedTodos }} are complete.</p>
+    <p class="card-text">You have {{ (todoSummary$ | async)?.incompleteTodos }} are incomplete. Get busy!</p>
+  </div>
+</div>

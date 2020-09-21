@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoListItem } from '../../models/todo-list-item';
+import { Observable } from 'rxjs';
+import { TodoDataService } from 'src/app/services/todo-data.service';
+import { TodoListItemCreate, TodoListItem } from '../../models';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,23 +10,31 @@ import { TodoListItem } from '../../models/todo-list-item';
 })
 export class TodoListComponent implements OnInit {
 
-  items: TodoListItem[] = [
-    { description: 'Mop Floors' },
-    { description: 'Send invites for next week\'s class' }
-  ];
-
-  constructor() { }
+  items$: Observable<TodoListItem[]>;
+  hasCompletedItems$: Observable<boolean>;
+  constructor(private service: TodoDataService) { }
 
   ngOnInit(): void {
+    this.items$ = this.service.getTodoList();
+    this.hasCompletedItems$ = this.service.hasCompletedItems();
   }
 
   addItem(what: HTMLInputElement): void {
-    const newItem: TodoListItem = {
-      description: what.value
+    const newItem: TodoListItemCreate = {
+      description: what.value,
     };
-    this.items = [newItem, ...this.items];
+    this.service.addTodoItem(newItem);
     what.value = ''; // clear it out.
     what.focus(); // Put the cursor there for another entry
+  }
+
+  markComplete(item: TodoListItem): void {
+    this.service.markComplete(item);
+  }
+
+  removeCompleted(): void {
+    // this.items = this.items.filter(item => item.completed === false);
+    this.service.removeCompleted();
   }
 
 }
