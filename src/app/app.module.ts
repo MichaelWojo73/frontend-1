@@ -15,6 +15,7 @@ import { CountByComponent } from './components/count-by/count-by.component';
 import { EffectsModule } from '@ngrx/effects';
 import { DemoEffects } from './effects/demo.effect';
 import { CounterEffects } from './effects/counter.effects';
+import { BooksModule } from './features/books/books.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { CounterEffects } from './effects/counter.effects';
   ],
   imports: [
     BrowserModule,
+    BooksModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
