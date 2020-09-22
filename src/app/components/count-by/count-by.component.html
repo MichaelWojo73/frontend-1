@@ -1,0 +1,16 @@
+<div class="btn-group"
+     role="group"
+     aria-label="Set Count By">
+  <button type="button"
+          [disabled]="(by$ | async)=== 1"
+          (click)="countBySet(1)"
+          class="btn btn-secondary">1</button>
+  <button type="button"
+          [disabled]="(by$ | async)=== 3"
+          (click)="countBySet(3)"
+          class="btn btn-secondary">3</button>
+  <button type="button"
+          [disabled]="(by$ | async)=== 5"
+          (click)="countBySet(5)"
+          class="btn btn-secondary">5</button>
+</div>
