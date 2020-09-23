@@ -1,0 +1,12 @@
+<div class="btn-group"
+     role="group"
+     aria-label="Sort your Book List">
+  <button type="button"
+          [disabled]="sortingByTitle$ | async"
+          (click)="changeSortToTitle()"
+          class="btn btn-secondary">Title</button>
+  <button type="button"
+          [disabled]="sortingByAuthor$ | async"
+          (click)="changeSortToAuthor()"
+          class="btn btn-secondary">Author</button>
+</div>

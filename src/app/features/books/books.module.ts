@@ -8,6 +8,8 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, featureName } from './reducers';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookListComponent } from './components/book-list/book-list.component';
+import { BookSorterComponent } from './components/book-sorter/book-sorter.component';
 const routes: Routes = [
   {
     path: 'books',
@@ -15,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: ListComponent
+        component: BookListComponent
       },
       {
         path: 'new',
@@ -34,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BooksComponent, ListComponent, EntryComponent, OverviewComponent],
+  declarations: [BooksComponent, ListComponent, EntryComponent, OverviewComponent, BookListComponent, BookSorterComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
