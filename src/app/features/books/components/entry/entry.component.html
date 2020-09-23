@@ -1,1 +1,43 @@
-<p>entry works!</p>
+<form [formGroup]="bookForm"
+      (ngSubmit)="submit(focusMe)">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text"
+           name="title"
+           autofocus
+           #focusMe
+           formControlName="title"
+           class="form-control">
+    <div class="alert alert-danger"
+         *ngIf="title.invalid && (title.dirty || title.touched)">
+      <p *ngIf="title.errors.required">This is required.</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input type="text"
+           formControlName="author"
+           name="author"
+           class="form-control">
+    <div class="alert alert-danger"
+         *ngIf="author.invalid && (author.dirty || author.touched)">
+      <p *ngIf="author.errors.required">An author is required.</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="numberOfPages">Number of Pages</label>
+    <input type="number"
+           formControlName="numberOfPages"
+           name="numberOfPages"
+           class="form-control">
+    <div class="alert alert-danger"
+         *ngIf="numberOfPages.invalid && (numberOfPages.dirty || numberOfPages.touched)">
+      <p *ngIf="numberOfPages.errors.required">Number of pages is required.</p>
+      <p *ngIf="numberOfPages.errors.min">Books have a minimum of {{ numberOfPages.errors.min.min}} pages.</p>
+      <p *ngIf="numberOfPages.errors.max">Books have a maximum of {{ numberOfPages.errors.max.max }} pages.</p>
+    </div>
+  </div>
+  <button type="submit"
+          [disabled]="bookForm.invalid"
+          class="btn btn-success">Add</button>
+</form>
