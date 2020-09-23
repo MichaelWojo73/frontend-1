@@ -42,15 +42,32 @@ const selectSortingBy = createSelector(
   b => b.sortBooksBy
 );
 
+const selectBookListItemsUnsorted = createSelector(
+  selectBooksArray,
+  b => b as BookListItem[]
+);
 // 4. What our Components Need
 
 // TODO: BookListItem[]
 
 export const selectBookListItems = createSelector(
-  selectBooksArray,
-  b => b as BookListItem[]
+  selectBookListItemsUnsorted,
+  selectSortingBy,
+  (list, by) => {
+    return [...list.sort((lhs, rhs) => {
+      if (lhs[by] < rhs[by]) {
+        return -1;
+      }
+      if (lhs[by] > rhs[by]) {
+        return 1;
+      }
+      return 0;
+    })];
+  }
 );
 
+
+// selectBookListItems
 export const selectSortingByTitle = createSelector(
   selectSortingBy,
   b => b === 'title'

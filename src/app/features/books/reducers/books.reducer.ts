@@ -18,8 +18,8 @@ export const adapter = createEntityAdapter<BookEntity>();
 const initialState: BookListState = {
   ids: ['1', '2'],
   entities: {
-    1: { id: '1', title: 'Object Oriented Ontology', author: 'Harman', numberOfPages: 217 },
-    2: { id: '2', title: 'Music Theory for Computer Musicians', author: 'Hewitt', numberOfPages: 189 }
+    1: { id: '1', title: 'XObject Oriented Ontology', author: 'AHarman', numberOfPages: 217 },
+    2: { id: '2', title: 'AMusic Theory for Computer Musicians', author: 'XAbrams', numberOfPages: 189 }
   }
 };
 
