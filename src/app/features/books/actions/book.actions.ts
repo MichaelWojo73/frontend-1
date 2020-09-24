@@ -15,6 +15,18 @@ export const bookCreated = createAction(
   })
 );
 
+export const bookCreatedSuccess = createAction(
+  '[books] book was created successfully',
+  props<{ oldId: string, payload: BookEntity }>()
+);
+
+export const bookCreatedFailure = createAction(
+  '[books] book creation failed',
+  props<{ message: string, payload: BookEntity }>()
+);
+
+
+
 interface BookCreate {
   title: string;
   author: string;

@@ -12,6 +12,23 @@ export class BookEffects {
 
   private url = environment.apiUrl;
 
+  // bookCreated -> (bookCreatedSucceeded | bookCreatedFailed)
+  addBook$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.bookCreated),
+      map(a => a.payload), // Actions -> BookEntity
+      switchMap(book => this.client.post<BookEntity>(this.url + 'books', getBookCreateFromBook(book))
+        .pipe(
+          map(payload => actions.bookCreatedSuccess({ oldId: book.id, payload })), // payload -> action (that's going to the reducer)
+          catchError((err) => {
+            console.log('Got an error:', err);
+            return of(actions.bookCreatedFailure({ message: 'Could not add book', payload: book })); // this is going to the reducer
+          })
+        )
+      )
+    ), { dispatch: true }
+  );
+
   // loadBooks -> (loadBookSucceeded | loadBooksFailed)
   loadBooks$ = createEffect(() =>
     this.actions$.pipe(
@@ -36,4 +53,12 @@ export class BookEffects {
 
 interface GetBooksResponse {
   data: BookEntity[];
+}
+
+function getBookCreateFromBook(book: BookEntity): { title: string, author: string, numberOfPages: number } {
+  return {
+    title: book.title,
+    author: book.author,
+    numberOfPages: book.numberOfPages
+  };
 }
