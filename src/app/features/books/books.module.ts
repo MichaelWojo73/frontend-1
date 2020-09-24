@@ -10,6 +10,10 @@ import { reducers, featureName } from './reducers';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookSorterComponent } from './components/book-sorter/book-sorter.component';
+import { EffectsModule } from '@ngrx/effects';
+import { BooksAppEffects } from './effects/books-app.effects';
+import { HttpClientModule } from '@angular/common/http';
+import { BookEffects } from './effects/book.effects';
 const routes: Routes = [
   {
     path: 'books',
@@ -41,7 +45,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(featureName, reducers),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EffectsModule.forFeature([BooksAppEffects, BookEffects]),
+    HttpClientModule
   ],
   exports: [BooksComponent]
 })
