@@ -1,3 +1,7 @@
+<div class="alert alert-info"
+     *ngIf="books.length === 0">
+  <h3>Sorry. You don't have any books! Add Some!</h3>
+</div>
 <div class="card"
      *ngFor="let book of books">
   <div class="card-body">

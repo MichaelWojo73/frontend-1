@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DemoEffects } from './effects/demo.effect';
 import { CounterEffects } from './effects/counter.effects';
 import { BooksModule } from './features/books/books.module';
+import { ErrorDisplayComponent } from './components/error-display/error-display.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { BooksModule } from './features/books/books.module';
     DashboardComponent,
     NavComponent,
     CounterComponent,
-    CountByComponent
+    CountByComponent,
+    ErrorDisplayComponent
   ],
   imports: [
     BrowserModule,

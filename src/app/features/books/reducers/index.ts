@@ -50,6 +50,11 @@ const selectBookListItemsUnsorted = createSelector(
 
 // TODO: BookListItem[]
 
+export const selectBooksLoaded = createSelector(
+  selectUiHintsBranch,
+  b => b.booksLoaded
+);
+
 export const selectBookListItems = createSelector(
   selectBookListItemsUnsorted,
   selectSortingBy,

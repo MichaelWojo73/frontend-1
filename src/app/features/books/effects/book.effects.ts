@@ -39,7 +39,7 @@ export class BookEffects {
           map(payload => actions.loadBookDataSucceeded({ payload })),
           catchError((err) => {
             console.log('THERE WAS AN ERROR:', err);
-            return of(actions.loadBookDataFailed({ message: 'See the console ' }));
+            return of(actions.loadBookDataFailed({ message: 'Could Not Load The Books' }));
           })
         )
       )
