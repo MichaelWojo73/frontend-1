@@ -44,7 +44,10 @@ const selectSortingBy = createSelector(
 
 const selectBookListItemsUnsorted = createSelector(
   selectBooksArray,
-  b => b as BookListItem[]
+  books => books.map(book => ({
+    ...book,
+    isTemporary: book.id.toString().startsWith('T')
+  } as BookListItem))
 );
 // 4. What our Components Need
 

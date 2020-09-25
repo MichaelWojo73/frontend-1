@@ -2,7 +2,7 @@
   <h3>Your Vast Books Collection</h3>
 </header>
 <div class="alert alert-info"
-     *ngIf="!(booksLoaded$ | async)">
+     *ngIf="(booksLoaded$ | async) === false">
   <img src="https://media.giphy.com/media/S52lrApo9JY4aBw6zL/giphy.gif"
        alt="Loading...">
 </div>

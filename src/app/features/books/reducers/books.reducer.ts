@@ -26,7 +26,20 @@ const reducerFunction = createReducer(
   on(actions.bookCreatedSuccess, (oldState, action) => {
     const tempState = adapter.removeOne(action.oldId, oldState);
     return adapter.addOne(action.payload, tempState);
-  })
+  }),
+  on(actions.removeBook, (s, a) => adapter.removeOne(a.payload.id, s)),
+  on(actions.updatedBookTitle, (s, a) => adapter.updateOne({
+    id: a.payload.id,
+    changes: {
+      title: a.newTitle
+    }
+  }, s)),
+  on(actions.updatedBookTitleFailure, (s, a) => adapter.updateOne({
+    id: a.payload.id,
+    changes: {
+      title: a.payload.title
+    }
+  }, s))
 );
 
 export function reducer(state: BookListState = initialState, action: Action): BookListState {

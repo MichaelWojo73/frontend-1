@@ -3,4 +3,5 @@ export interface BookListItem {
   title: string;
   author: string;
   numberOfPages: number;
+  isTemporary: boolean;
 }

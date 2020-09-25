@@ -5,11 +5,29 @@
 <div class="card"
      *ngFor="let book of books">
   <div class="card-body">
-    <h5 class="card-title">{{ book.title }}</h5>
+    <h5 class="card-title">
+      <span *ngIf="isEditing !== book.id">{{ book.title }}
+        <button *ngIf="!book.isTemporary"
+                (click)="edit(book.id)"
+                class="btn btn-sm btn-primary">edit</button></span>
+      <span *ngIf="isEditing === book.id"><input class="form-control"
+               #newTitle
+               value="{{book.title}}">
+        <div>
+          <button (click)="updateTitle(newTitle.value, book)"
+                  class="btn btn-sm btn-success">Save</button>
+          <button (click)="cancelTitleEdit()"
+                  class="btn btn-sm btn-danger">Cancel</button>
+        </div>
+      </span>
+    </h5>
     <h6 class="card-subtitle mb-2 text-muted">by {{ book.author }}</h6>
     <p class="card-text">{{ book.title }} by {{book.author }} has
       {{ book.numberOfPages }} Pages</p>
-    <a href="#"
-       class="card-link">Mark it for Sale (TODO)</a>
+    <p *ngIf="book.isTemporary"><em>Saving your book...</em></p>
+    <button type="button"
+            *ngIf="!book.isTemporary"
+            (click)="removeBook(book)"
+            class="btn btn-link">Remove Book</button>
   </div>
 </div>

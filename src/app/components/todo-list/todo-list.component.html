@@ -17,5 +17,5 @@
 
 </ul>
 <button (click)="removeCompleted()"
-        [disabled]="!(hasCompletedItems$ | async)"
+        [disabled]="(hasCompletedItems$ | async) === false"
         class="btn btn-danger">Remove Completed Items</button>
